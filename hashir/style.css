@@ -1,0 +1,95 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    background-color: black;
+    /* background-image: linear-gradient(to right, #ff7e5f, #feb47b); */
+    /* Example linear gradient */
+    /* background-image: radial-gradient(circle, #a18cd1, #fbc2eb); /* Example radial gradient */
+     /* background-image: conic-gradient(from 90deg at 50% 50%, red, yellow, green); Example conic gradient  */
+}
+
+span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+h1 {
+    /* margin: auto; */
+    /* padding: 0px 0px 0px 0px; */
+    /* max-width: 200px; */
+    /* max-height: 200px; */
+    color: rgb(255, 255, 255);
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-size: 150px;
+    text-transform: capitalize;
+    background-color: black;
+    font-weight: 900;
+    /* letter-spacing: 10px; */
+    /* Run a bounce on page load once, then allow a subtle float on the inner text */
+    animation: bounceIn 900ms cubic-bezier(.215,.61,.355,1) 1 both;
+}
+
+/* gradient text and ongoing animations */
+.gradient-text {
+    background: linear-gradient(90deg, #05eae6, #03d159, #00ff37);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    /* gradient color shift + subtle float after the initial bounce */
+    animation: gradientShift 3s linear infinite, floatText 4s ease-in-out 1s infinite;
+    background-size: 200% 200%;
+    display: inline-block; /* keep transform effects contained to the text */
+}
+
+/* Bounce keyframes for the page-load effect */
+@keyframes bounceIn {
+  0% {
+    transform: translateY(-120vh) scale(0.8);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(30px) scale(1.05);
+    opacity: 1;
+  }
+  80% {
+    transform: translateY(-10px) scale(0.98);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Subtle floating after bounce (applies to inner .gradient-text so it composes with parent transform) */
+@keyframes floatText {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+/* Smooth color shifting across the gradient */
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Respect user preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  h1, .gradient-text {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* small screen adjustments so text doesn't overflow */
+@media (max-width: 700px) {
+  h1 { font-size: 72px; }
+}
